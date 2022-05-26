@@ -1,0 +1,84 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+/*
+    로또 프로그램 구현하기
+    : 1~45 번호 중 중복되지 않는 6자리 추출하기
+    Math.random(): 0 <= ? < 1 사이의 랜덤한 실수 발생
+*/
+public class RandomExam6 {
+    public static void main(String[] args) {
+        Util util = new Util();
+        int[] lotto = new int[6];
+        String name = new String("홍길동");
+//        name.
+//        Scanner scanner = new Scanner(System.in);
+
+        int count = 0;
+
+        //for문을 무한 루프 while문으로 수정하기
+        boolean stop = false;
+
+        while (!stop) {
+            int num = (int) (Math.floor(Math.random() * 45) + 1);
+
+
+            //동일 번호가 존재하면 번호를 다시 생성
+            if (util.isExist(lotto, num)) {
+                continue;
+                //동일 번호가 존재하지 않으면 배열요소에 저장
+            } else {
+                lotto[count++] = num;
+            }
+
+            //로또 번호 6개가 모두 추출되면 무한 루프를 빠져나온다.
+            if (count == lotto.length) {
+                stop = true;
+            }
+        }
+        for (int i = 0; i < lotto.length; i++) {
+            Util.printLine('-', 3);
+            System.out.println(lotto[i]);
+        }
+//        System.out.println("while문 반복 횟수: " + count);
+//        System.out.println(Arrays.toString(lotto));
+    }
+}
+
+        /*
+        int count = 0;  //for문 반복 횟수 카운트
+        for (int i = 0; i < lotto.length; i++) {
+            int num = (int) (Math.floor(Math.random() * 45) + 1);
+            count++; //count = count * 1, count *= 1;
+
+            //동일 번호가 존재하면
+            if (isExist(lotto, num)) {
+                i--; // i = i - 1, i -= 1;
+                continue;
+            }
+            lotto[i] = num;
+        }
+        System.out.println("for문 반복 횟수: " + count);
+        System.out.println(Arrays.toString(lotto));
+    }
+    */
+
+
+
+/*
+public static boolean isExist(int[] arr, int num) {
+        num = (int) (Math.random() * 45) +1;
+        for (int i = 0; i < 7; i++) {
+            arr[i] = num;
+
+            for (int j = 0; j < i; j++) {
+                if (arr[i] == num) {
+                    i--;
+                    break;
+                }
+            }
+        }
+        return false;
+}
+*/
+
