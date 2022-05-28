@@ -38,7 +38,6 @@ public class HackJum4 {
     public static double getAverage(int total, int count) {
         return total / (double) count;
     }
-
 }
 
 

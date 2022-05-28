@@ -12,20 +12,22 @@ public class Test2 {
         {
 //            int x = 20;
             int y = 5;
-            System.out.println("x=" + x);
-            System.out.println("y=" + y);
+            System.out.println("x= " + x);
+            System.out.println("y= " + y);
         }
         method1(x);
-//        System.out.println("y=" + y);
+        /*
+        System.out.println("y: " + y);
 
-        /* for (int x = 1; i < 10; i++) {
+        for (int x = i; i < 10; i++) {
 
-        } */
+        }
+        */
     }
-    
+
      public static void method1(int x) {
         int y = 20;
-        System.out.println("x=" + x);
-        System.out.println("y=" + y);
+        System.out.println("x= " + x);
+        System.out.println("y= " + y);
     }
 }

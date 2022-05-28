@@ -39,7 +39,6 @@ public class HackJum3 {
     public static double getAverage(int total, int count) {
         return total / (double) count;
     }
-
 }
 
 
@@ -81,6 +80,5 @@ public class HackJum3 {
     public static double avgMethod(int sumMethod, int count) {
         return sumMethod / (double) count;
     }
-
 }
 */

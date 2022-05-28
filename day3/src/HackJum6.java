@@ -7,39 +7,24 @@ public class HackJum6 {
 
         boolean stop = false;
 
-        while (!stop) {
+        while(!stop) {
+            int kor  = inputValue("국어"); //국어점수
+            int eng  = inputValue("영어"); //영어점수
+            int math = inputValue("수학"); //수학어점수
 
-            int kor = inputValue("국어");
-            if(kor == -1) {
-                stop = true;
-                continue;
-            }
+            int sum = 0;  //총점
+            double average = 0.0; //평균
 
-            int eng = inputValue("영어");
-            if(kor == -1) {
-                stop = true;
-                continue;
-            }
-
-            int math = inputValue("수학");
-            if(kor == -1) {
-                stop = true;
-                continue;
-            }
-
-            int sum = 0;
-            double average = 0;
-
-            sum = getSum(kor, eng, math);
-            average = getAverage(sum);
+            sum = total(kor, eng, math);
+            average = getAverage(sum, 3);
 
             System.out.println("총점 = " + sum);
             System.out.println("평균 = " + average);
-
         }
     }
+
     public static int inputValue(String title) {
-        System.out.println(title + " 점수 >>");
+        System.out.print(title + " 점수 >> ");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -53,14 +38,11 @@ public class HackJum6 {
         return score;
     }
 
-    public static int getSum(int korean, int english, int math) {
-
+    public static int total(int korean, int english, int math) {
         return korean + english + math;
-
     }
 
-    public static double getAverage(int sum) {
-
-        return (double)sum/3;
+    public static double getAverage(int total, int count) {
+        return total / (double) count;
     }
 }

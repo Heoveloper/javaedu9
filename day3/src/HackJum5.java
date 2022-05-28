@@ -23,28 +23,28 @@ public class HackJum5 {
                 continue;
             }
 
-                    int sum = 0; //총점
-                    double average = 0.0; //평균
+            int sum = 0; //총점
+            double average = 0.0; //평균
 
-                    sum = total(kor, eng, math);
-                    average = getAverage(sum, 3);
+            sum = total(kor, eng, math);
+            average = getAverage(sum, 3);
 
-                    System.out.println("총점: " + sum);
-                    System.out.println("평균: " + average);
-                }
-            }
+            System.out.println("총점: " + sum);
+            System.out.println("평균: " + average);
+        }
+    }
 
     public static int inputValue(String title) {
         Scanner scanner = new Scanner((System.in));
         System.out.print(title + " 점수 >> ");
         String input = scanner.nextLine();
 
+        int score = 0;
         if (input.equals("Q") || input.equals("q")) {
-            System.out.println("종료 !");
-            System.exit(1);
+            score = -1;
+        } else {
+            score = Integer.parseInt(input);
         }
-
-        int score = Integer.parseInt(input);
         return score;
     }
 
@@ -59,5 +59,4 @@ public class HackJum5 {
     public static double getAverage(int total, int count) {
         return total / (double) count;
     }
-
 }

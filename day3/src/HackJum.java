@@ -12,7 +12,7 @@ public class HackJum {
         //average = (double)sum / 3;
         //case2)
         //average = sum / (double)3;
-        //case)
+        //case3)
         average = sum / (3 * 1.0);
         System.out.println("총점: " + sum);
         System.out.println("평균: " + average);
