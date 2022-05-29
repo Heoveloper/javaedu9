@@ -33,6 +33,7 @@ public class SumOfOneToTen2 {
                 stop = true;
                 continue;
             }
+            //실행문;;
         } while (!stop);
         return sum;
     }
