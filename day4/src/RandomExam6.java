@@ -21,7 +21,6 @@ public class RandomExam6 {
             lotto[i] = num;
             i++;
         }
-
         System.out.println("반복 = "+count);
         System.out.println(Arrays.toString(lotto));
     }

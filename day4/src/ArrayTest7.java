@@ -7,9 +7,10 @@ public class ArrayTest7 {
             System.out.println("x[" + i + "] = " + x[i]);
         }
         System.out.println("======");
-        /* 향상된 for문
-        배열 or 컬렉션의 모든 요소를 순차적으로 접근하고자 할 때 일반 for문 대신 사용 */
-        //for (요소를 대입할 변수 : 배열 or 컬렉션){}
+
+//        향상된 for문
+//        배열 or 컬렉션의 모든 요소를 순차적으로 접근하고자 할 때 일반 for문 대신 사용
+//        for (요소를 대입할 변수 : 배열 or 컬렉션){}
         for (int i : x) {
             System.out.println("x[" + i + "] = " + x[i]);
         }

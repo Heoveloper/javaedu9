@@ -1,14 +1,18 @@
 public class HackJum {
     public static void main(String[] args) {
-        /* case1
+        /*
+        case1)
         int[] subject = new int[3];
 
         subject[0] = 82; //국어점수
         subject[1] = 73; //영어점수
-        subject[2] = 65; //수학점수 */
+        subject[2] = 65; //수학점수
+        */
 
-        /* //case2
-        int[] subject = new int[]{80, 90, 100}; */
+        /*
+        case2)
+        int[] subject = new int[]{80, 90, 100};
+        */
 
         //case3
         int[] subject = {80, 90, 100, 70};

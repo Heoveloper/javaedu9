@@ -6,7 +6,6 @@
     배열선언:   int[] 변수이름; or int 변수이름[];
     배열생성:   변수이름 = new int[요소의 크기];
     (ex 국, 영, 수 3과목을 저장하겠다: 변수이름 = new int[3];)
-
 */
 public class ArrayTest1 {
     public static void main(String[] args) {

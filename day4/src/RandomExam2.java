@@ -4,6 +4,7 @@ import java.util.Arrays;
     로또 프로그램 구현하기
     : 1~45 번호 중 중복되지 않는 6자리 추출하기
     Math.random(): 0 <= ? < 1 사이의 랜덤한 실수 발생
+    중복 체크 로직은 별도의 메소드를 사용하여 구현할 것
 */
 
 public class RandomExam2 {

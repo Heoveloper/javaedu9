@@ -31,7 +31,9 @@ public class ArrayTest4 {
     }
 }
 
-/* int[][] array = new int[2][3];  //2행 3열
+/*
+int[][] array = new int[2][3];  //2행 3열
 
         System.out.println(array.length);
-        System.out.println(array[0].length); */
+        System.out.println(array[0].length);
+*/
