@@ -12,6 +12,7 @@ public class Person extends Object {
     {
         System.out.println("인스턴스 초기화 블럭2!");
     }
+
     //정적 초기화 블럭
     static {
         System.out.println("정적 초기화 블럭!");

@@ -13,7 +13,6 @@ public class DiceMain {
 
         boolean stop = false;
         do {
-
             //주사위 인스턴스 각각 던지는 행위
             dice1.roll();
             dice2.roll();

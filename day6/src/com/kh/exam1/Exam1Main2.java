@@ -7,7 +7,7 @@ public class Exam1Main2 {
         Calculator c1 = new Calculator("빨강");
         Calculator c2 = new Calculator("빨강", "모닝글로리");
 
-
+        //켜다
         c1.powerOff();
 
         try {

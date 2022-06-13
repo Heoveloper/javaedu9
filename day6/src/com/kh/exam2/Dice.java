@@ -18,7 +18,7 @@ public class Dice {
     }
 
     public int getFaceValue() {
-        return faceValue;
+        return this.faceValue;
     }
 }
 
