@@ -11,36 +11,37 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+
 public class ProductSVCImpl implements ProductSVC {
-    private final ProductDAO productDAO;
+  private final ProductDAO productDAO;
 
-    //등록
-    @Override
-    public Long save(Product product) {
-        return productDAO.save(product);
-    }
+  //등록
+  @Override
+  public Long save(Product product) {
+    return productDAO.save(product);
+  }
 
-    //목록
-    @Override
-    public List<Product> findAll() {
-        return productDAO.findAll();
-    }
+  //목록
+  @Override
+  public List<Product> findAll() {
+    return productDAO.findAll();
+  }
 
-    //조회
-    @Override
-    public Product findByProductId(Long productId) {
-        return productDAO.findByProductId(productId);
-    }
+  //조회
+  @Override
+  public Product findByProductId(Long productId) {
+    return productDAO.findByProductId(productId);
+  }
 
-    //수정
-    @Override
-    public int update(Long productId, Product product) {
-        return productDAO.update(productId, product);
-    }
+  //수정
+  @Override
+  public int update(Long productId, Product product) {
+    return productDAO.update(productId, product);
+  }
 
-    //삭제
-    @Override
-    public int deleteByProductId(Long productId) {
-        return productDAO.deleteByProductId(productId);
-    }
+  //삭제
+  @Override
+  public int deleteByProductId(Long productId) {
+    return productDAO.deleteByProductId(productId);
+  }
 }
