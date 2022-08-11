@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <caption>공공데이터 목록</caption>
+        <thead>
+            <tr>
+                <th>항목1</th>
+                <th>항목2</th>
+                <th>항목3</th>
+            </tr>
+        </thead>
+        <tbody id="list">
+            <!-- <tr>
+                <td>값1</td>
+                <td>값1</td>
+                <td>값1</td>
+            </tr>
+            <tr>
+                <td>값2</td>
+                <td>값2</td>
+                <td>값2</td>
+            </tr>
+            <tr>
+                <td>값3</td>
+                <td>값3</td>
+                <td>값3</td>
+            </tr> -->
+        </tbody>
+    </table>
+    <script>
+        const xhr = new XMLHttpRequest();
+        const method = 'GET';
+        const url = 'http://localhost:9080/api/pub';
+        xhr.open(method, url);   //request 요청 초기화
+        xhr.send();              //request 요청 전송
+
+        const async_h = e => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                const status = xhr.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    //요청 성공
+                    console.log(xhr.responseText);
+                    //json문자열 => js객체
+                    jsObj = JSON.parse(xhr.responseText);
+                    console.log(jsObj);
+                    if (jsObj.header.resultCode == '00') {
+                        const html =
+                            jsObj.body.data.map(ele => {
+                                `<tr><td>${ele.company}</td><td>${ele.lat}</td><td>${ele.lng}</td></tr>`
+                            }).join('');
+
+                        document.getElementById('list').innerHTML = html;
+                    } else {
+                        console.log('resultCode 00 아님');
+                    }
+                } else {
+                    //요청 실패
+                }
+            }
+        };
+
+        xhr.addEventListener('readystatechange', async_h);
+    </script>
+</body>
+</html>

@@ -60,7 +60,7 @@ xhr.addEventListener('readystatechange', e => {
           //console.log(jsObj.response.body);
           const header = jsObj.response.header;
           const body = jsObj.response.body
-          if (getText(heaer.resultCode) == '00') {
+          if (getText(header.resultCode) == '00') {
             console.log('성공');
             const result = jsObj.response.body.items.item;
             result.forEach((ele) => {
