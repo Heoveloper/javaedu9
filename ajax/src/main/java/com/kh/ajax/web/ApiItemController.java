@@ -90,6 +90,16 @@ public class ApiItemController {
     return result;
   }
 
+  //전체삭제
+  @ResponseBody
+  @DeleteMapping
+  public ApiResult<Object> deleteAll() {
+    itemDAO.clearStore();
+    ApiResult<Object> result = null;
+    result = new ApiResult<>("00","success", "상품 전체삭제");
+    return result;
+  }
+
 
   //빈생성후 후처리
   @PostConstruct

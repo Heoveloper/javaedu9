@@ -6,24 +6,90 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Title</title>
+  <script src="/js/create_element.js"></script>
 </head>
 
 <body>
-  <form action="">
-    <p>상품명 <input type="text" id="pname"></p>
-    <p>브랜드 <input type="text" id="brand"></p>
-    <p>상품설명 <textarea id="desc" cols="10" rows="3"></textarea></p>
-    <p>가격 <input type="text" id="price"></p>
+  <form id="productForm" action="/api/items" method="POST">
+    <p>상품명 <input type="text" id="pname" name="name"></p>
+    <p>브랜드 <input type="text" id="brand" name="brand"></p>
+    <p>상품설명 <textarea id="desc" cols="10" rows="3" name="desc"></textarea></p>
+    <p>가격 <input type="text" id="price" name="price"></p>
+    <div><button id="createBtn" type="submit">등록</button></div>
   </form>
 
-  <div><button id="createBtn">등록</button></div>
   <div><button id="listBtn">목록</button></div>
   <div><input type="text" id="detailItemId"><button id="detailBtn">조회</button></div>
   <!-- <div><input type="text" id="delItemId"><button id="delBtn">삭제</button></div> -->
 
   <div>상품목록</div>
-  <div id="itemList"></div>
+  <div id="itemList">
+    <div id="msg"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>아이디</th>
+          <th>상품명</th>
+          <th>브랜드</th>
+          <th>상품설명</th>
+          <th>가격</th>
+        </tr>
+      </thead>
+      <tbody id="dataList">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
 
+  </div>
+
+  <script>
+    const $productForm = document.getElementById('productForm');
+    const $parentElement = document.getElementById('dataList');
+
+    //상품등록
+    const addProduct = result => {
+      if(result.rtcd == "00") {
+        const product = result.data;
+        
+        const $tr = 
+        makeElements('tr', null,
+          makeElements('td', null, product.id.toString()),
+          makeElements('td', null, product.name),
+          makeElements('td', null, product.brand),
+          makeElements('td', null, product.desc),
+          makeElements('td', null, product.price.toString()));
+        $parentElement.appendChild($tr);
+      } else {
+        document.getElementById('msg').textContent = '상품등록에 문제가 발생했습니다. 관리자에게 문의 바랍니다.';
+      }
+    }
+
+
+    $productForm.addEventListener('submit', e=>{
+      e.preventDefault();
+      
+      const xhr = new XMLHttpRequest();
+      // const method = $productForm.method;
+      // const action = $productForm.action;
+      const {method, action} = $productForm;  //객체 디스트럭처링
+      xhr.open(method, action);
+      xhr.setRequestHeader('content-type', 'application/json');
+      xhr.send(JSON.stringify(Object.fromEntries(new FormData ($productForm))));
+      xhr.addEventListener('load', e=>{
+        if (xhr.status == '200') {
+          console.log(xhr.responseText);
+          addProduct(JSON.parse(xhr.responseText));
+        } else {
+          console.log(xhr.status, xhr.statusText);
+        }
+      });
+    });
   </script>
 </body>
 </html>
