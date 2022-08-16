@@ -52,18 +52,24 @@
     const $productForm = document.getElementById('productForm');
     const $parentElement = document.getElementById('dataList');
 
-    //상품등록
-    const addProduct = result => {
-      if(result.rtcd == "00") {
-        const product = result.data;
-        
-        const $tr = 
+    //상품표시
+    const displayProduct = product => {
+      const $tr =
         makeElements('tr', null,
           makeElements('td', null, product.id.toString()),
           makeElements('td', null, product.name),
           makeElements('td', null, product.brand),
           makeElements('td', null, product.desc),
           makeElements('td', null, product.price.toString()));
+      return $tr;
+    }
+
+    //상품등록
+    const addProduct = result => {
+      if(result.rtcd == "00") {
+        const product = result.data;
+        
+        const $tr = displayProduct(product);
         $parentElement.appendChild($tr);
       } else {
         document.getElementById('msg').textContent = '상품등록에 문제가 발생했습니다. 관리자에게 문의 바랍니다.';
@@ -71,6 +77,7 @@
     }
 
 
+    //상품등록 이벤트 등록
     $productForm.addEventListener('submit', e=>{
       e.preventDefault();
       
@@ -89,6 +96,40 @@
           console.log(xhr.status, xhr.statusText);
         }
       });
+    });
+
+    //상품목록
+    const listProduct = result => {
+      if (result.rtcd == '00') {
+        const products = result.data;
+        // products.map(product => displayProduct(product));
+        const fragment = new DocumentFragment
+        products.map(displayProduct)
+                // .forEach(fragment.appendChild);
+                .forEach(ele => fragment.appendChild(ele));
+        // $parentElement.appendChild(fragment);
+        $parentElement.replaceChild(fragment);
+      } else {
+        document.getElementById('msg').textContent = '상품등록에 문제가 발생했습니다. 관리자에게 문의 바랍니다.';
+      }
+
+    }
+
+    //상품목록 이벤트
+    listBtn.addEventListener('click', e=>{
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/api/items');
+    xhr.send(null);
+    xhr.addEventListener('load', e=>{
+      if (xhr.status == '200') {
+        console.log(xhr.responseText);
+        listProduct(JSON.parse(xhr.responseText));
+      } else {
+        console.log(xhr.status, xhr.statusText);
+      }
+    });
+
     });
   </script>
 </body>
