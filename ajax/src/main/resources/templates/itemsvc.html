@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+</head>
+
+<body>
+  <form action="">
+    <p>상품명 <input type="text" id="pname"></p>
+    <p>브랜드 <input type="text" id="brand"></p>
+    <p>상품설명 <textarea id="desc" cols="10" rows="3"></textarea></p>
+    <p>가격 <input type="text" id="price"></p>
+  </form>
+
+  <div><button id="createBtn">등록</button></div>
+  <div><button id="listBtn">목록</button></div>
+  <div><input type="text" id="detailItemId"><button id="detailBtn">조회</button></div>
+  <!-- <div><input type="text" id="delItemId"><button id="delBtn">삭제</button></div> -->
+
+  <div>상품목록</div>
+  <div id="itemList"></div>
+
+  </script>
+</body>
+</html>
