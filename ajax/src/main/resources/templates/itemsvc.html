@@ -80,11 +80,11 @@
     //     makeElements('tr', {'data-product-id': product.id},
     //       makeElements('td', null,
     //         makeElements('input', {type: 'checkbox', 'data-product-id': id})),
-    //       makeElements('td', null, id+''),
+    //       makeElements('td', null, id.tostring()),
     //       makeElements('td', null, name),
     //       makeElements('td', null, brand),
     //       makeElements('td', null, desc),
-    //       makeElements('td', null, price+''),
+    //       makeElements('td', null, price ?? ''),
     //       makeElements('td', null,
     //         makeElements('button', {'id': 'updateBtn'}, '수정')));
     //   return $tr;
