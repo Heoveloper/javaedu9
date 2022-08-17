@@ -7,6 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Title</title>
   <script src="/js/create_element.js"></script>
+  <style>
+    #msg {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,7 +26,7 @@
 
   <div><button id="listBtn">목록</button></div>
   <div><input type="text" id="detailItemId"><button id="detailBtn">조회</button></div>
-  <!-- <div><input type="text" id="delItemId"><button id="delBtn">삭제</button></div> -->
+  <div><button id="delBtn">삭제</button></div>
 
   <div>상품목록</div>
   <div id="itemList">
@@ -28,6 +34,7 @@
     <table>
       <thead>
         <tr>
+          <th><button id="delAll">전체선택</button></th>
           <th>아이디</th>
           <th>상품명</th>
           <th>브랜드</th>
@@ -37,6 +44,7 @@
       </thead>
       <tbody id="dataList">
         <tr>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -52,20 +60,26 @@
     const $productForm = document.getElementById('productForm');
     const $parentElement = document.getElementById('dataList');
 
-    //에러표시
-    const displayError = msg => {
+    //메세지표시
+    const displayMsg = msg => {
       document.getElementById('msg').textContent = msg;
+    }
+    //메세지숨김
+    const clearMsg = msg => {
+      document.getElementById('msg').textContent = '';
     }
 
     //상품표시
     const displayProduct = product => {
       const $tr =
         makeElements('tr', null,
-          makeElements('td', null, product.id.toString()),
+          makeElements('td', null,
+            makeElements('input', {type: 'checkbox', 'data-product-id': product.id})),
+          makeElements('td', null, product.id?.toString()),
           makeElements('td', null, product.name),
           makeElements('td', null, product.brand),
           makeElements('td', null, product.desc),
-          makeElements('td', null, product.price.toString()));
+          makeElements('td', null, product.price?.toString()));
       return $tr;
     }
 
@@ -76,8 +90,9 @@
         
         const $tr = displayProduct(product);
         $parentElement.appendChild($tr);
+        clearMsg();
       } else {
-        displayError('상품등록에 문제가 발생했습니다. 관리자에게 문의 바랍니다.');
+        displayMsg('상품등록에 문제가 발생했습니다. 관리자에게 문의 바랍니다.');
       }
     }
 
@@ -113,8 +128,9 @@
 
         $parentElement.innerHTML = '';
         $parentElement.appendChild(fragment);
+        clearMsg();
       } else {
-        displayError('상품등록에 문제가 발생했습니다. 관리자에게 문의 바랍니다.');
+        displayMsg('상품목록 가져오기 문제가 발생했습니다. 관리자에게 문의 바랍니다.');
       }
 
     }
@@ -148,12 +164,11 @@
         }
 
         $parentElement.appendChild($tr);
+        clearMsg();
       } else {
-        displayError('상품등록에 문제가 발생했습니다. 관리자에게 문의 바랍니다.');
+        displayMsg('상품조회 가져오기 문제가 발생했습니다. 관리자에게 문의 바랍니다.');
       }
     }
-
-
 
     //상품조회 이벤트 등록
     detailBtn.addEventListener('click', e=>{
@@ -177,20 +192,50 @@
       }
     });
 
-    //상품조회 이벤트 등록 (나)
-    // detailBtn.addEventListener('click', e=>{
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open('GET', '/api/items');
-    //   xhr.send(null);
-    //   xhr.addEventListener('load', e=>{
-    //     if (xhr.status == '200') {
-    //      const item = document.getElementById("detailItemId").value; 
-    //      console.log(item); 
-    //     } else {
-    //       console.log(xhr.status, xhr.statusText);
-    //     }
-    //   });
-    // });
+    //전체선택
+    let isCheckedAll = false;
+    delAll.addEventListener('click', e=>{
+      const $inputs = document.querySelectorAll('#dataList input[type=checkbox]');
+      // $inputs.forEach(ele => {isCheckedAll ? ele.checked = false : ele.checked = true});
+      $inputs.forEach(ele=>{ele.checked = !isCheckedAll});
+      isCheckedAll = !isCheckedAll;
+    });
+
+    //상품삭제
+    const deleteItem = (ele, result) => {
+      if (result.rtcd == '00') {
+        $parentElement.removeChild(ele.closest('tr'));
+        clearMsg();
+      } else {
+        displayMsg('상품삭제에 문제가 발생하였습니다. 관리자에게 확인바랍니다.')
+      }
+    }
+
+    //상품삭제 이벤트 등록
+    delBtn.addEventListener('click', e=>{
+      const $inputs = document.querySelectorAll('#dataList input[type=checkbox]');
+      const $checkedBoxes = Array.from($inputs).filter(ele=>ele.checked);
+      const countOfCheckedBox = $checkedBoxes.length;
+      if (countOfCheckedBox == 0) {
+        displayMsg('삭제할 상품을 선택하세요.');
+        return;
+      } else {
+        $checkedBoxes.forEach(ele => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('DELETE', `/api/items/${ele.dataset.productId}`);
+          xhr.send(null);
+          xhr.addEventListener('load', e=>{
+            if (xhr.status == '200') {
+              console.log(xhr.responseText);  
+              deleteItem(ele, JSON.parse(xhr.responseText));  
+            } else {
+              console.log(xhr.status, xhr.statusText);
+            }
+          });
+        });
+
+      }
+    });
   </script>
 </body>
 </html>
