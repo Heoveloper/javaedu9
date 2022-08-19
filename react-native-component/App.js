@@ -29,6 +29,8 @@ export default function App() {
           (() => (number % 2 == 0) ? '짝수' : '홀수')()
         }
       </Text>
+      { number % 2 == 0 && <Text>짝수</Text> }
+      { number % 2 !== 0 && <Text>홀수</Text> }
       <StatusBar style="auto" />
     </View>
       // <Fragment>
