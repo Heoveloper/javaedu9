@@ -2,8 +2,10 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import App from './src/App';
+export default App;
 
-export default function App() {
+export function App2() {
   const name = '홍길동';
   const number = 10;
   return (
